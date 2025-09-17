@@ -62,3 +62,63 @@ logs/
 
 # --- Notebooks / reports builds ---
 reports/_build/
+
+# --- Core LaTeX aux files ---
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.lol
+*.synctex.gz
+*.synctex(busy)
+*.auxlock
+
+# --- BibTeX / Biber ---
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# --- Index / Glossaries / Nomenclature ---
+*.idx
+*.ind
+*.ilg
+*.ist
+*.acr
+*.acn
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.nlo
+*.nls
+
+# --- Beamer ---
+*.nav
+*.snm
+*.vrb
+
+# --- latexmk / arara ---
+.fdb_latexmk
+.fls
+
+# --- TikZ / PGF externalization ---
+*-figure*.pdf
+*-figure*.eps
+*.dpth
+*.dep
+*.md5
+
+# --- minted / listings ---
+_paper*/           # if you externalize figures into jobname-based dirs
+_minted-*/
+*.pyg
+
+# --- Common build dirs (customize to your setup) ---
+build/
+latex.out/
+out/
+auto/
