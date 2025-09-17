@@ -1,0 +1,64 @@
+# --- OS & editors ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+.vscode/
+.idea/
+
+# --- Python basics ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.venv/
+venv/
+.env
+.env.*
+dist/
+build/
+*.egg
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+.profile_default/
+# Large embedded outputs can bloat history; consider clearing outputs before commit.
+
+# --- Testing & coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.pyre/
+
+# --- Data & results (keep big/raw data out of Git) ---
+data/raw/
+data/interim/
+data/tmp/
+*.fits
+*.fit
+*.hdf5
+*.h5
+*.npz
+*.parquet
+# If you need a small sample for docs/tests, re-include it:
+!data/samples/**
+# For large binaries you DO want tracked, consider Git LFS instead of ignoring:
+#   git lfs install
+#   git lfs track "*.fits" "*.h5"
+#   git add .gitattributes
+
+# --- Logs & artifacts ---
+logs/
+*.log
+*.out
+*.err
+
+# --- Notebooks / reports builds ---
+reports/_build/
