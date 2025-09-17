@@ -1,0 +1,102 @@
+Intro to Github 
+
+Git -> version control on your computer to track changes
+Github -> the website that hosts your Git repos and platform for collaboration
+
+- Install Git
+-- Instructions for Mac/Linux/Windows: https://git-scm.com/downloads 
+- Configure your identity
+-- In command line, run: 
+--- git config --global user.name "Your Name"
+--- git config --global user.email "you@example.com"
+--- git config --global init.defaultBranch main
+
+- Authenticate with Github using SSH
+-- In command line, run the following and press enter to accept defaults. If you want to create your own file and password that is also possible, I personally did not. 
+--- ssh-keygen -t ed25519 -C "you@example.com"
+--- cat ~/.ssh/id_ed25519.pub
+-- In Github, go to Settings -> SSH and GPG keys -> New SSH Key 
+--- Copy in the output from the second command above, 3.a.ii
+--- I titled it with my device name ex: “My Macbook”
+--- Test the connection
+---- In command line run: ssh -T git@github.com
+---- Accept the connection 
+
+- Create your first repo 
+-- In command line, run
+--- mkdir hello-github && cd hello-github
+---- git init
+---- echo "# Hello GitHub" > README.md
+---- git add README.md
+---- git commit -m "Initial commit"
+--- On Github, click “New Repository” -> name it hello-github
+---- After creating repository on github, connect and push:
+----- In command line, run 
+------ git remote add origin git@github.com:YOUR_USERNAME/hello-github.git
+------ git push -u origin main
+
+- Daily workflow you’ll use 90% of the time:
+-- In command line, with comments explaining each action in #
+--- git status                 # what changed?
+--- git pull                   # get latest main
+--- git switch -c feature/x    # make a branch for your change
+--- # edit files...
+--- git add -p                 # stage just what you want
+--- git commit -m "feat: explain your change"
+--- git push -u origin feature/x
+-- Opening a Pull Request on Github -> request review -> Merge -> then back on your laptop, in command line run:
+--- git switch main
+--- git pull
+--- git branch -d feature/x
+-- Creating a new repository on the command line: 
+--- echo "# hello-github" >> README.md
+--- git init
+--- git add README.md
+--- git commit -m "first commit"
+--- git branch -M main
+--- git remote add origin https://github.com/mwindju/hello-github.git
+--- git push -u origin main
+-- Pushing an existing repository from command line: 
+--- git remote add origin https://github.com/mwindju/hello-github.git
+--- git branch -M main
+--- git push -u origin main
+-- Common actions:
+--- See history: git log --oneline --graph --decorate --all
+--- Compare changes: git diff (unstaged) • git diff --staged (staged)
+--- Unstage: git restore --staged <file>
+--- Discard local file changes: git restore <file>
+--- Revert a bad commit (safe): git revert <commit>
+--- Stash work temporarily: git stash (→ later) git stash pop
+-- Good habits to incorporate early:
+--- .gitignore -> avoid committing junk like builds, caches, secrets, etc.
+---- For Python/Jupyter projects, add these to .gitignore: .ipynb_checkpoints/, __pycache__/, *.pyc, .DS_Store, .env, .venv/
+--- Commit messages: use the present tense and be concise, for example: feat: add abundance fitting routine • fix: handle NaN metallicities
+--- Branches: use one topic per branch, ex: features/plot-spec, bugfix/units
+--- Never commit secrets like tokens, passwords. Always keep these in your .env or your OS keychain!
+
+- Working with big files
+-- Github rejects files greater than 100 MB
+-- Use Git LFS for large/binary data (ex: .fits, .hdf5)
+--- brew install git-lfs
+--- git lfs install
+--- git lfs track "*.fits" "*.h5"
+--- git add .gitattributes
+--- git commit -m "chore: track large data with LFS"
+-- Keep raw data elsewhere if it’s huge, store code + small samples in the repo
+
+- Collaborating - Forks + Upstreams
+-- If you fork a project: 
+--- git clone git@github.com:<YOU>/<FORK>.git
+--- cd <FORK>
+--- git remote add upstream git@github.com:<ORIGINAL>/<PROJECT>.git
+--- git fetch upstream
+--- git switch main
+--- git merge upstream/main   # or: git rebase upstream/main
+-- Create a feature branch, push to your fork, and open a pull request back to the original repo 
+
+- Setting up your repo for use or reference by others
+-- README.md: what the project does, how to run it.
+-- LICENSE: pick one (MIT/BSD-3-Clause are common in science).
+-- CITATION.cff: helps others cite your work.
+-- requirements.txt or environment.yml: reproducible installs.
+-- Optional: CONTRIBUTING.md, CODE_OF_CONDUCT.md.
